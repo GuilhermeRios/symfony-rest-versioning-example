@@ -1,0 +1,3 @@
+api_movie:
+    type: rest
+    resource: App\Controller\MovieController

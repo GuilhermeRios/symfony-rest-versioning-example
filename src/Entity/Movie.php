@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,8 +30,19 @@ class Movie
      * @var string
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
+     *
+     * @Serializer\Until("v1")
      */
     private $description;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Since("v2")
+     */
+    private $director;
 
     public function getId(): ?int
     {
@@ -57,6 +69,18 @@ class Movie
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDirector(): ?string
+    {
+        return $this->director;
+    }
+
+    public function setDirector(string $director): self
+    {
+        $this->director = $director;
 
         return $this;
     }
