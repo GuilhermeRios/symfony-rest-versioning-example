@@ -11,6 +11,7 @@ use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
 class AccessToken extends BaseAccessToken
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,14 +19,15 @@ class AccessToken extends BaseAccessToken
     protected $id;
 
     /**
+     * @var Client
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $client;
 
     /**
+     * @var User
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     protected $user;
-
 }

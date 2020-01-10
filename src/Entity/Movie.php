@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Movie
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,12 +19,14 @@ class Movie
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
+     * @var string
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
      */

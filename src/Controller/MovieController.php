@@ -5,18 +5,20 @@ namespace App\Controller;
 use App\Entity\Movie;
 use App\Form\MovieType;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Rest\Version("v1")
  * @Route("/api", name="api_")
  */
 class MovieController extends AbstractFOSRestController
 {
     /**
-     * List all movies
+     * List all movies.
+     *
      * @Rest\Get("/movies", name="movies")
      *
      * @return Response
@@ -31,10 +33,10 @@ class MovieController extends AbstractFOSRestController
     }
 
     /**
-     * Create a movie
+     * Create a movie.
+     *
      * @Rest\Post("/movie")
      *
-     * @param Request $request
      * @return Response
      */
     public function postMovieAction(Request $request)
@@ -51,6 +53,7 @@ class MovieController extends AbstractFOSRestController
 
             return $this->handleView($this->view(['status' => 'ok'], Response::HTTP_CREATED));
         }
+
         return $this->handleView($this->view($form->getErrors()));
     }
 }

@@ -11,6 +11,7 @@ use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 class Client extends BaseClient
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -21,5 +22,4 @@ class Client extends BaseClient
     {
         parent::__construct();
     }
-
 }

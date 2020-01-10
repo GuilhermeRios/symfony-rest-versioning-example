@@ -9,18 +9,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MovieType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
             ->add('description');
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Movie::class,
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 }

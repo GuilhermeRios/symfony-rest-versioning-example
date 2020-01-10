@@ -6,7 +6,8 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
     param_fetcher_listener: true
     access_denied_listener:
         json: true
@@ -14,3 +15,5 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+    versioning:
+        enabled: true

@@ -11,6 +11,7 @@ use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
 class RefreshToken extends BaseRefreshToken
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,14 +19,15 @@ class RefreshToken extends BaseRefreshToken
     protected $id;
 
     /**
+     * @var Client
      * @ORM\ManyToOne(targetEntity="Client")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $client;
 
     /**
+     * @var User
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     protected $user;
-
 }

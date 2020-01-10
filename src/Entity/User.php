@@ -11,6 +11,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -24,5 +25,4 @@ class User extends BaseUser
     {
         parent::__construct();
     }
-
 }
