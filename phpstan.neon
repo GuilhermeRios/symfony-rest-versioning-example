@@ -25,3 +25,4 @@ parameters:
         - '#Method .* should return .* but returns object#'
         - '#Method .* should return .* but returns .*ObjectRepository#'
         - '#PHPDoc tag @return with type .*ObjectRepository is not subtype of native type .*Repository#'
+        - '#Negated boolean expression is always false.#'
