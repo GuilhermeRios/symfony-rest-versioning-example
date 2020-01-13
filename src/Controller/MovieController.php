@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\Form\MovieType;
+use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,10 +18,30 @@ use Symfony\Component\HttpFoundation\Response;
 class MovieController extends AbstractFOSRestController
 {
     /**
+     * Get a movie.
+     *
+     * @return Response
+     *
+     * @throws Exception
+     */
+    public function getAction(int $id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Movie::class);
+
+        /** @var Movie $movie */
+        $movie = $repository->findOneBy(['id' => $id]);
+
+        if (!$movie) {
+            throw new Exception('Invalid id');
+        }
+
+        return $this->handleView($this->view($movie));
+    }
+
+    /**
      * List all movies.
      *
      * @return Response
-     * @Serializer\Since("v2")
      */
     public function listAction()
     {
@@ -59,13 +79,23 @@ class MovieController extends AbstractFOSRestController
      * Delete a movie.
      *
      * @return Response
+     *
+     * @throws Exception
      */
-    public function deleteAction()
+    public function deleteAction(int $id)
     {
         $repository = $this->getDoctrine()->getRepository(Movie::class);
-        /** @var Movie[] $movies */
-        $movies = $repository->findAll();
 
-        return $this->handleView($this->view($movies));
+        /** @var Movie $movie */
+        $movie = $repository->findOneBy(['id' => $id]);
+
+        if (!$movie) {
+            throw new Exception('Invalid id');
+        }
+
+        $this->getDoctrine()->getManager()->remove($movie);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->handleView($this->view(['message' => 'ok']));
     }
 }
